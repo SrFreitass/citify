@@ -17,11 +17,12 @@ class ApiClient {
     }
 
 
-    val instace: Retrofit by lazy {
+    val instace: ApiService by lazy {
          Retrofit.Builder()
             .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
+            .create(ApiService::class.java)
     }
 }
