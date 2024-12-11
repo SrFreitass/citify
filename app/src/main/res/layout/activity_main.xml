@@ -12,17 +12,24 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_title"
         android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
-        />
+        android:text="@string/main_title"
+        android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="10dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/plus_svgrepo_com"
     />
+
+    <view
+        class="androidx.appcompat.app.AlertController$RecycleListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </view>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
