@@ -12,15 +12,15 @@ class MainViewModel : ViewModel() {
     val syncStatus: LiveData<String> = _syncStatus
 
 
-    private suspend fun syncData() {
+    private suspend fun _syncData() {
         _syncStatus.value = "Sincronizando dados..."
         delay(5000)
         _syncStatus.value = "Dados sincronizados dados com sucesso!"
     }
 
-    fun syncDataImpl() {
+    fun syncData() {
         viewModelScope.launch {
-            syncData()
+            _syncData()
         }
     }
 }
