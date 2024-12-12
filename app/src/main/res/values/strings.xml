@@ -45,4 +45,5 @@
     </string>
     <string name="main_title">Cidades do Brasil</string>
     <string name="action_delete">Remover</string>
+    <string name="action_update">Atualizar</string>
 </resources>
