@@ -44,4 +44,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="main_title">Cidades do Brasil</string>
+    <string name="action_delete">Remover</string>
 </resources>
