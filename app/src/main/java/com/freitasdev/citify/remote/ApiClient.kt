@@ -1,6 +1,7 @@
 package com.freitasdev.citify.remote
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,8 +20,8 @@ class ApiClient {
 
     val instace: ApiService by lazy {
          Retrofit.Builder()
-            .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(baseURL)
             .client(client)
             .build()
             .create(ApiService::class.java)

@@ -54,7 +54,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Use a versão mais recente
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Conversor Gson
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1") // Dependências para corrotinas (verifique a versão mais recente)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")// interceptador de log para debugar
     ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

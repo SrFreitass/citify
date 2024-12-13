@@ -1,43 +1,43 @@
 package com.freitasdev.citify.model.dtos
 
 import com.freitasdev.citify.model.entities.CityEntity
-
-fun CityDTO.toCityEntity(): CityEntity {
-    return CityEntity(
-        id = this.id,
-        name = this.nome,
-        uf = this.microrregiao.mesorregiao.uf.nome,
-        region = this.microrregiao.mesorregiao.uf.regiao.nome
-    )
-}
+import com.google.gson.annotations.SerializedName
 
 data class CityDTO(
-    val id: Int,
-    val nome: String,
-    val microrregiao: MicroRegion
+    @SerializedName("id") val id: Int,
+    @SerializedName("nome") val name: String,
+    @SerializedName("microrregiao") val microregion: Microregion
+) {
+    fun toCityEntity(): CityEntity {
+        return CityEntity(
+            name = this.name,
+            uf = this.microregion.mesoregion.state.acronym,
+            region = this.microregion.mesoregion.state.region.name
+        )
+    }
+}
+
+data class Microregion(
+    @SerializedName("id") val id: Int,
+    @SerializedName("nome") val name: String,
+    @SerializedName("mesorregiao") val mesoregion: Mesoregion
 )
 
-data class MicroRegion(
-    val id: Int,
-    val nome: String,
-    val mesorregiao: MesoRegion
+data class Mesoregion(
+    @SerializedName("id") val id: Int,
+    @SerializedName("nome") val name: String,
+    @SerializedName("UF") val state: State
 )
 
-data class MesoRegion(
-    val id: Int,
-    val nome: String,
-    val uf: UF
-)
-
-data class UF(
-    val id: Int,
-    val nome: String,
-    val regiao: Region
+data class State(
+    @SerializedName("id") val id: Int,
+    @SerializedName("sigla") val acronym: String,
+    @SerializedName("nome") val name: String,
+    @SerializedName("regiao") val region: Region
 )
 
 data class Region(
-    val id: Int,
-    val sigla: String,
-    val nome: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("sigla") val acronym: String,
+    @SerializedName("nome") val name: String
 )
-

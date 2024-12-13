@@ -19,9 +19,9 @@ interface CityDAO {
     )
     suspend fun insertCities(cities: List<CityEntity>)
 
-    @Delete
-    suspend fun deleteCity(id: Int)
-
-    @Update
-    suspend fun updateCity(city: CityEntity)
+//    @Delete
+//    suspend fun deleteCity(id: Int)
+//
+//    @Update
+//    suspend fun updateCity(city: CityEntity)
 }
