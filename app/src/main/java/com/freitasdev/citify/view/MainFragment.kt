@@ -1,5 +1,6 @@
 package com.freitasdev.citify.view
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,16 +9,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.Toast
+import androidx.core.view.size
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.freitasdev.citify.R
 import com.freitasdev.citify.adapter.CityAdapter
 import com.freitasdev.citify.model.db.AppDatabase
-import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
 import com.freitasdev.citify.viewmodel.MainViewModel
 
@@ -57,11 +57,12 @@ class MainFragment : Fragment() {
         val loading = view.findViewById<TextView>(R.id.loading_text)
         val citiesList = view.findViewById<RecyclerView>(R.id.cities)
 
-
         val cityAdapter =
             CityAdapter(
                 requireContext(),
-                mutableListOf()
+                mutableListOf(),
+                {},
+                {}
             )
 
         citiesList.layoutManager = LinearLayoutManager(context)
@@ -78,13 +79,20 @@ class MainFragment : Fragment() {
         })
 
         mainViewModel.cities.observe(viewLifecycleOwner, Observer {
-            citiesList.adapter = mainViewModel.cities.value?.let { it1 ->
-                CityAdapter(
-                    requireContext(),
-                    it1
-                )
-            }
+            citiesList.adapter = CityAdapter(
+                requireContext(),
+                mainViewModel.cities.value?.toMutableList()
+                 ?: mutableListOf(),
+                {
+                    mainViewModel.deleteCity(it)
+                },
+                {
+                    val dialog = UpdateCityDialog(it, {
+                        mainViewModel.getCities()
+                    })
+                    dialog.show(childFragmentManager, "Update City")
+                }
+            )
         })
-
     }
 }

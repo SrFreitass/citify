@@ -48,19 +48,11 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="end|bottom"
-        android:importantForAccessibility="no"
-        android:src="@drawable/plus_svgrepo_com" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sync_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_gravity="start|bottom"
+        android:layout_gravity="end|bottom"
         android:importantForAccessibility="no"
         android:src="@drawable/sync" />
 

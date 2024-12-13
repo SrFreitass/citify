@@ -29,7 +29,21 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
 
     private suspend fun _getCities() {
         val citiesResponse = repository.getCities()
-        _cities.value = citiesResponse
+        _cities.value = citiesResponse.toMutableList()
+    }
+
+    private suspend fun _deleteCity(id: Int) {
+        repository.deleteCity(id)
+        val updatedList = _cities.value?.filter {
+            it.id != id
+        }
+        _cities.value = updatedList ?: listOf()
+    }
+
+    fun deleteCity(id: Int) {
+        viewModelScope.launch {
+            _deleteCity(id)
+        }
     }
 
     fun getCities() {
@@ -41,7 +55,10 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
     fun syncData() {
         viewModelScope.launch {
             _syncData()
+            _getCities()
         }
     }
+
+
 
 }
