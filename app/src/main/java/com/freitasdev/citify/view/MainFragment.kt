@@ -1,5 +1,6 @@
 package com.freitasdev.citify.view
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -94,7 +95,17 @@ class MainFragment : Fragment() {
                 mainViewModel.cities.value?.toMutableList()
                  ?: mutableListOf(),
                 {
-                    mainViewModel.deleteCity(it)
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Você tem certeza?")
+                        .setMessage("Você ira deletar ao cidade ao clicar em confirmar")
+                        .setPositiveButton("Confirmar") { dialog, _ ->
+                            mainViewModel.deleteCity(it)
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Cancelar") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 },
                 {
                     val dialog = UpdateCityDialog(it, {

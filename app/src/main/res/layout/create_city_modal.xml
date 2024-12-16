@@ -35,12 +35,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <Spinner
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="18dp"
+            android:background="@drawable/border"
             android:id="@+id/state_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/state_hint" />
-
+            android:entries="@array/uf_options"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,11 +51,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <Spinner
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="18dp"
+            android:background="@drawable/border"
             android:id="@+id/region_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/region_hint" />
+            android:entries="@array/region_options"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 

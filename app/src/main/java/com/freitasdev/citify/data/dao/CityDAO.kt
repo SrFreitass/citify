@@ -11,7 +11,7 @@ import com.freitasdev.citify.model.entities.CityEntity
 @Dao
 interface CityDAO {
 
-    @Query("SELECT * FROM cities WHERE uf = 'MS'")
+    @Query("SELECT * FROM cities WHERE isDeleted = 0 ORDER BY id DESC")
     suspend fun getCities(): List<CityEntity>
 
     @Insert(
@@ -19,7 +19,7 @@ interface CityDAO {
     )
     suspend fun insertCities(cities: List<CityEntity>)
 
-    @Query("DELETE FROM cities WHERE id = :id")
+    @Query("UPDATE cities SET isDeleted = 1 WHERE id = :id")
     suspend fun deleteCity(id: Int = 1)
 
     @Query("SELECT * FROM cities WHERE id = :id ")

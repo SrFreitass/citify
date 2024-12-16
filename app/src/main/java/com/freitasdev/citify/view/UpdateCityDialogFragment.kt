@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Spinner
 import com.freitasdev.citify.R
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -46,8 +47,8 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
         viewModel.getCityById(cityId)
 
         val cityInput = view.findViewById<TextInputEditText>(R.id.city_input)
-        val stateInput = view.findViewById<TextInputEditText>(R.id.state_input)
-        val regionInput = view.findViewById<TextInputEditText>(R.id.region_input)
+        val stateInput = view.findViewById<Spinner>(R.id.state_input)
+        val regionInput = view.findViewById<Spinner>(R.id.region_input)
         val saveButton = view.findViewById<Button>(R.id.save_update)
 
         saveButton.setOnClickListener{
@@ -55,8 +56,8 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
                 CityEntity(
                     id = cityId,
                     name = cityInput?.text.toString(),
-                    uf = stateInput?.text.toString(),
-                    region = regionInput?.text.toString()
+                    uf = stateInput?.selectedItem.toString(),
+                    region = regionInput?.selectedItem.toString()
                 )
             )
 
@@ -66,8 +67,15 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
 
         viewModel.city.observe(viewLifecycleOwner, Observer {
             cityInput.setText(it?.name)
-            stateInput.setText(it?.uf)
-            regionInput.setText(it?.region)
+
+            val stateArray = resources.getStringArray(R.array.uf_options)
+            val regionArray = resources.getStringArray(R.array.region_options)
+
+            val statePosition = stateArray.indexOf(it?.uf)
+            val regionPosition = regionArray.indexOf(it?.region)
+
+            stateInput.setSelection(statePosition)
+            regionInput.setSelection(regionPosition)
         })
 
     }

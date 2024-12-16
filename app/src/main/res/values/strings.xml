@@ -8,7 +8,7 @@
     <string name="previous">Previous</string>
 
 
-    <string name="main_title">Cidades do MS</string>
+    <string name="main_title">Cidades do Brasil</string>
     <string name="action_delete">Remover</string>
     <string name="action_update">Atualizar</string>
     <string name="title_dialog">Atualizar cidade\n</string>
@@ -17,5 +17,5 @@
     <string name="region_hint">Região do Brasil</string>
     <string name="update_save">Salvar alterações</string>
     <string name="create">Adicionar cidade</string>
-    <string name="title_create_city_dialog">Adicionar cidade do MS</string>
+    <string name="title_create_city_dialog">Adicionar cidade</string>
 </resources>

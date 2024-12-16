@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.freitasdev.citify.data.dao.CityDAO
 import com.freitasdev.citify.model.entities.CityEntity
 
-@Database(entities = [CityEntity::class], version = 1, exportSchema = false)
+@Database(entities = [CityEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cityDao(): CityDAO
 
@@ -19,8 +19,9 @@ abstract class AppDatabase : RoomDatabase() {
             instace ?: Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,
-                "app_database"
-            ).build().also { instace = it }
+                "app_database")
+                .fallbackToDestructiveMigration()
+                .build().also { instace = it }
         }
     }
 
