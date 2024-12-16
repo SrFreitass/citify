@@ -8,17 +8,17 @@ import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
 import kotlinx.coroutines.launch
 
-class DialogViewModel(private val repository: CityRepository): ViewModel() {
+class UpdateCityDialogViewModel(private val repository: CityRepository): ViewModel() {
     private val _city = MutableLiveData<CityEntity?>()
     val city: LiveData<CityEntity?> = _city
 
 
-    suspend fun _getCityById(id: Int) {
+    private suspend fun _getCityById(id: Int) {
         val cityResponse = repository.getCityById(id)
         _city.value = cityResponse
     }
 
-    suspend fun _updateCity(cityEntity: CityEntity) {
+    private suspend fun _updateCity(cityEntity: CityEntity) {
         repository.updateCity(cityEntity)
     }
 

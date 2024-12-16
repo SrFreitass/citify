@@ -53,9 +53,14 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel.getCities()
 
+        val createButton = view.findViewById<FloatingActionButton>(R.id.create_button)
         val buttonSync = view.findViewById<FloatingActionButton>(R.id.sync_button)
         val loading = view.findViewById<TextView>(R.id.loading_text)
         val citiesList = view.findViewById<RecyclerView>(R.id.cities)
+
+        val createCityDialog = CreateCityDialogFragment({
+            mainViewModel.getCities()
+        })
 
         val cityAdapter =
             CityAdapter(
@@ -73,6 +78,11 @@ class MainFragment : Fragment() {
             Toast.makeText(context, "Sincronizando dados", Toast.LENGTH_SHORT).show()
             mainViewModel.syncData()
         }
+
+        createButton?.setOnClickListener {
+            createCityDialog.show(childFragmentManager, "Create City")
+        }
+
 
         mainViewModel.syncStatus.observe(viewLifecycleOwner, Observer {
             loading.text = mainViewModel.syncStatus.value

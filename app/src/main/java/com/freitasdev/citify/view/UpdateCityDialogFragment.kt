@@ -1,11 +1,9 @@
 package com.freitasdev.citify.view
 
 import android.os.Bundle
-import android.print.PrintAttributes.Margins
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import com.freitasdev.citify.R
 import androidx.fragment.app.DialogFragment
@@ -13,12 +11,11 @@ import androidx.lifecycle.Observer
 import com.freitasdev.citify.model.db.AppDatabase
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
-import com.freitasdev.citify.viewmodel.DialogViewModel
-import com.freitasdev.citify.viewmodel.MainViewModel
+import com.freitasdev.citify.viewmodel.UpdateCityDialogViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit) : DialogFragment() {
-    private lateinit var viewModel: DialogViewModel
+    private lateinit var viewModel: UpdateCityDialogViewModel
     private lateinit var repository: CityRepository
 
 
@@ -31,7 +28,7 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
             repository = CityRepository(database.cityDao())
         }
 
-        viewModel = DialogViewModel(
+        viewModel = UpdateCityDialogViewModel(
             repository
         )
     }

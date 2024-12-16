@@ -9,7 +9,7 @@ import com.freitasdev.citify.remote.ApiClient
 class CityRepository(private val cityDAO: CityDAO) {
 
     // CREATE
-    suspend fun syncCities(){
+    suspend fun syncCities() {
         try {
             val response = ApiClient().instace.getCities()
 
@@ -26,6 +26,14 @@ class CityRepository(private val cityDAO: CityDAO) {
 
 
         } catch (e: Exception) {
+            Log.e("CityRepository", "Erro ao sincronizar as cidades: ${e.message}")
+        }
+    }
+
+    suspend fun createCity(cityEntity: CityEntity) {
+        try {
+            cityDAO.insertCities(listOf(cityEntity))
+        } catch(e: Exception) {
             Log.e("CityRepository", "Erro ao sincronizar as cidades: ${e.message}")
         }
     }
@@ -47,7 +55,6 @@ class CityRepository(private val cityDAO: CityDAO) {
         return listOf<CityEntity>()
     }
 
-    // TODO: UPDATE
 
     // DELETE
     suspend fun deleteCity(id: Int) {
