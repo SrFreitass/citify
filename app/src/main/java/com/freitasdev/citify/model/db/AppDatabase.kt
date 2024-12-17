@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.freitasdev.citify.data.dao.CityDAO
 import com.freitasdev.citify.model.entities.CityEntity
 
-@Database(entities = [CityEntity::class], version = 2, exportSchema = false)
+@Database(entities = [CityEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cityDao(): CityDAO
 

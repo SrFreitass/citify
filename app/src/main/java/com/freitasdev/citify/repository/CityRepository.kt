@@ -18,6 +18,8 @@ class CityRepository(private val cityDAO: CityDAO) {
                 return
             }
 
+            cityDAO.deleteAllCities()
+
             cityDAO.insertCities(
                 response.body()?.map {
                     it.toCityEntity()
@@ -68,7 +70,19 @@ class CityRepository(private val cityDAO: CityDAO) {
 
     suspend fun getCityById(id: Int): CityEntity? {
         try {
-            val city = cityDAO.getCity(id)
+            val city = cityDAO.getCityById(id)
+            Log.i("CityRepository", "A cidade foi encontrada!")
+            return city
+        } catch (e: Exception) {
+            Log.e("CityRepository", "Erro ao deletar a cidade: ${e.message}")
+        }
+
+        return null
+    }
+
+    suspend fun getCityByEntity(cityEntity: CityEntity): CityEntity? {
+        try {
+            val city = cityDAO.getCityByInfo(name =  cityEntity.name, uf = cityEntity.uf, region = cityEntity.region)
             Log.i("CityRepository", "A cidade foi encontrada!")
             return city
         } catch (e: Exception) {

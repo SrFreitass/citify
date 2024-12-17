@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.freitasdev.citify.R
 import com.freitasdev.citify.model.db.AppDatabase
@@ -58,17 +60,27 @@ class CreateCityDialogFragment(private val onCreateCity: () -> Unit) : DialogFra
 
             viewModel.createCity(
                 CityEntity(
-                    name = city.text.toString(),
+                    name = city.text?.trim().toString(),
                     uf = uf.selectedItem.toString(),
                     region = region.selectedItem.toString()
                 )
             )
 
             city.text = null
-
-            dialog?.dismiss()
-            onCreateCity()
+            Toast.makeText(requireContext(), "Carregando...", Toast.LENGTH_LONG).show()
         }
+
+        viewModel.createdStatus.observe(viewLifecycleOwner, Observer {
+
+            if(!it) {
+                Toast.makeText(requireContext(), "Cidade inválida (Já existente)", Toast.LENGTH_LONG).show()
+                return@Observer
+            }
+
+            Toast.makeText(requireContext(), "Cidade criada", Toast.LENGTH_LONG).show()
+            onCreateCity()
+            dialog?.dismiss()
+        })
     }
 
     override fun onStart() {

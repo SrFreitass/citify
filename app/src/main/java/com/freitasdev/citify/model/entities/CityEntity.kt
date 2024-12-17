@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "cities", indices = [Index(value = ["name"], unique = true)])
+@Entity(tableName = "cities")
 data class CityEntity(
     @PrimaryKey (autoGenerate = true)
     val id: Int = 0,

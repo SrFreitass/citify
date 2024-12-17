@@ -1,7 +1,6 @@
 package com.freitasdev.citify.data.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -22,8 +21,14 @@ interface CityDAO {
     @Query("UPDATE cities SET isDeleted = 1 WHERE id = :id")
     suspend fun deleteCity(id: Int = 1)
 
+    @Query("UPDATE cities SET isDeleted = 1")
+    suspend fun deleteAllCities()
+
     @Query("SELECT * FROM cities WHERE id = :id ")
-    suspend fun getCity(id: Int = 1): CityEntity
+    suspend fun getCityById(id: Int = 1): CityEntity
+
+    @Query("SELECT * FROM cities WHERE LOWER(name) = LOWER(:name) AND uf = :uf AND region = :region")
+    suspend fun getCityByInfo(name: String, uf: String, region: String): CityEntity
 
     @Update
     suspend fun updateCity(city: CityEntity)
