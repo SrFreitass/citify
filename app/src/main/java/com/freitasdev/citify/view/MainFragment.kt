@@ -21,6 +21,7 @@ import com.freitasdev.citify.adapter.CityAdapter
 import com.freitasdev.citify.model.db.AppDatabase
 import com.freitasdev.citify.repository.CityRepository
 import com.freitasdev.citify.viewmodel.MainViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class MainFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
@@ -58,6 +59,7 @@ class MainFragment : Fragment() {
         val buttonSync = view.findViewById<FloatingActionButton>(R.id.sync_button)
         val loading = view.findViewById<TextView>(R.id.loading_text)
         val citiesList = view.findViewById<RecyclerView>(R.id.cities)
+        val searchInput = view.findViewById<TextInputEditText>(R.id.search_input)
 
         val createCityDialog = CreateCityDialogFragment({
             mainViewModel.getCities()
@@ -73,6 +75,11 @@ class MainFragment : Fragment() {
 
         citiesList.layoutManager = LinearLayoutManager(context)
         citiesList.adapter = cityAdapter
+
+        searchInput?.setOnEditorActionListener { textView, i, keyEvent ->
+            mainViewModel.getCityByName(textView?.text.toString())
+            false
+        }
 
         buttonSync?.setOnClickListener {
             Log.i("MainFragment", "Click para sincronizar dados")

@@ -101,4 +101,16 @@ class CityRepository(private val cityDAO: CityDAO) {
         }
     }
 
+
+    suspend fun getCityByName(name: String): List<CityEntity>? {
+        try {
+            val cities = cityDAO.getCityByName(name)
+            Log.i("CityRepository", "A cidade foi alterada!")
+            return cities
+        } catch (e: Exception) {
+            Log.e("CityRepository", "Erro ao deletar a cidade: ${e.message}")
+        }
+
+        return null
+    }
 }

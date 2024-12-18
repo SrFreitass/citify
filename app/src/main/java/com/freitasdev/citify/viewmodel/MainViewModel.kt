@@ -40,6 +40,16 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
         _cities.value = updatedList ?: listOf()
     }
 
+    private suspend fun _getCityByName(name: String) {
+        _cities.value = repository.getCityByName("%$name%") ?: listOf()
+    }
+
+    fun getCityByName(name: String) {
+        viewModelScope.launch {
+            _getCityByName(name)
+        }
+    }
+
     fun deleteCity(id: Int) {
         viewModelScope.launch {
             _deleteCity(id)

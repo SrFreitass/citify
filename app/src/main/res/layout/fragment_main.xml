@@ -47,11 +47,52 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textFilter"
+                android:id="@+id/search_input"
                 android:drawableStart="@drawable/search_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/search_cities"
                 />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Cent. O"
+                    android:layout_marginEnd="5dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sul"
+                    android:layout_marginEnd="5dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Nort."
+                    android:layout_marginEnd="5dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Nord."
+                    android:layout_marginEnd="5dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Sud."
+                    android:layout_marginEnd="5dp"
+                    />
+            </RadioGroup>
+
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,6 +105,7 @@
             android:layout_marginTop="8dp"
             />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -90,6 +132,9 @@
             android:layout_gravity="end|bottom"
             android:importantForAccessibility="no"
             android:src="@drawable/sync" />
+
+
+
 
 
     </LinearLayout>

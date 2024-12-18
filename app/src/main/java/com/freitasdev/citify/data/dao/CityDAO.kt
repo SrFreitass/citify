@@ -30,6 +30,9 @@ interface CityDAO {
     @Query("SELECT * FROM cities WHERE LOWER(name) = LOWER(:name) AND uf = :uf AND region = :region")
     suspend fun getCityByInfo(name: String, uf: String, region: String): CityEntity
 
+    @Query("SELECT * FROM cities WHERE LOWER(name) LIKE LOWER(:name)")
+    suspend fun getCityByName(name: String): List<CityEntity>
+
     @Update
     suspend fun updateCity(city: CityEntity)
 }
