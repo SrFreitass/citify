@@ -18,4 +18,5 @@
     <string name="update_save">Salvar alterações</string>
     <string name="create">Adicionar cidade</string>
     <string name="title_create_city_dialog">Adicionar cidade</string>
+    <string name="search_cities">Pesquisar cidade</string>
 </resources>
