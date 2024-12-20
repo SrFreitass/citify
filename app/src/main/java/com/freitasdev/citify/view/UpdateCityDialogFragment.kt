@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import com.freitasdev.citify.R
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -52,6 +53,22 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
         val saveButton = view.findViewById<Button>(R.id.save_update)
 
         saveButton.setOnClickListener{
+            val states = when (regionInput.selectedItem.toString()) {
+                "Centro-Oeste" -> resources.getStringArray(R.array.Centro_oeste)
+                "Nordeste" -> resources.getStringArray(R.array.Nordeste)
+                "Norte" -> resources.getStringArray(R.array.Norte)
+                "Sudeste" -> resources.getStringArray(R.array.Sudeste)
+                "Sul" -> resources.getStringArray(R.array.Sul)
+                else -> resources.getStringArray(R.array.Centro_oeste)
+            }
+
+            if(states.indexOf(stateInput.selectedItem.toString()) == -1) {
+                Toast.makeText(requireContext(), "Estado inválido não corresponde a região", Toast.LENGTH_LONG).show()
+
+                return@setOnClickListener
+            }
+
+
             viewModel.updateCity(
                 CityEntity(
                     id = cityId,
@@ -60,7 +77,7 @@ class UpdateCityDialog(private val cityId: Int, private val onUpdate: () -> Unit
                     region = regionInput?.selectedItem.toString()
                 )
             )
-
+ 
             onUpdate()
             dialog?.dismiss()
         }

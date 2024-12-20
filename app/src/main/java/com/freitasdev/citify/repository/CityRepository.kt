@@ -108,7 +108,29 @@ class CityRepository(private val cityDAO: CityDAO) {
             Log.i("CityRepository", "A cidade foi alterada!")
             return cities
         } catch (e: Exception) {
-            Log.e("CityRepository", "Erro ao deletar a cidade: ${e.message}")
+            Log.e("CityRepository", "Erro ao requisitar a cidade: ${e.message}")
+        }
+
+        return null
+    }
+
+    suspend fun getCityByRegion(region: String): List<CityEntity>? {
+        try {
+            val cities = cityDAO.getCityByRegion(region)
+            return cities
+        } catch (e: Exception) {
+            Log.e("CityRepository", "Erro ao requisitar a cidade: ${e.message}")
+        }
+
+        return null
+    }
+
+    suspend fun getCityByState(state: String): List<CityEntity>? {
+        try {
+            val cities = cityDAO.getCityByState(state)
+            return cities
+        } catch (e: Exception) {
+            Log.e("CityRepository", "Erro ao requisitar a cidade: ${e.message}")
         }
 
         return null

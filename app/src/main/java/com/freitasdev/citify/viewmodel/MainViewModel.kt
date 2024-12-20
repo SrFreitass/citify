@@ -20,6 +20,16 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
 
     private suspend fun _syncData() {
         _syncStatus.value = "Sincronizando dados..."
+
+        val cities = repository.getCities()
+
+        if(cities.isNotEmpty()) {
+            _syncStatus.value = "Dados já sincronizados!"
+            delay(1000)
+            _syncStatus.value = ""
+            return
+        }
+
         repository.syncCities()
         Log.i("SyncData", "Sincronizar cidades")
         _syncStatus.value = "Dados sincronizados dados com sucesso!"
@@ -42,6 +52,27 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
 
     private suspend fun _getCityByName(name: String) {
         _cities.value = repository.getCityByName("%$name%") ?: listOf()
+    }
+
+    private suspend fun _getCityByRegion(region: String) {
+        _cities.value = repository.getCityByRegion(region) ?: listOf()
+    }
+
+    private suspend fun _getCityByState(state: String) {
+        _cities.value = repository.getCityByState(state) ?: listOf()
+    }
+
+
+    fun getCityByState(state: String) {
+        viewModelScope.launch {
+            _getCityByState(state)
+        }
+    }
+
+    fun getCityByRegion(region: String) {
+        viewModelScope.launch {
+            _getCityByRegion(region)
+        }
     }
 
     fun getCityByName(name: String) {

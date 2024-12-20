@@ -37,4 +37,83 @@
         <item>SE</item>
         <item>TO</item>
     </string-array>
+
+    <string-array name="uf_options_filter">
+        <item>TODOS ESTADOS</item>
+        <item>AC</item>
+        <item>AL</item>
+        <item>AP</item>
+        <item>AM</item>
+        <item>BA</item>
+        <item>CE</item>
+        <item>DF</item>
+        <item>ES</item>
+        <item>GO</item>
+        <item>MA</item>
+        <item>MT</item>
+        <item>MS</item>
+        <item>MG</item>
+        <item>PA</item>
+        <item>PB</item>
+        <item>PR</item>
+        <item>PE</item>
+        <item>PI</item>
+        <item>RJ</item>
+        <item>RN</item>
+        <item>RS</item>
+        <item>RO</item>
+        <item>RR</item>
+        <item>SC</item>
+        <item>SP</item>
+        <item>SE</item>
+        <item>TO</item>
+    </string-array>
+
+    <!-- Região Centro-Oeste -->
+    <string-array name="Centro_oeste">
+        <item>MS</item> <!-- Mato Grosso do Sul -->
+        <item>MT</item> <!-- Mato Grosso -->
+        <item>GO</item> <!-- Goiás -->
+        <item>DF</item> <!-- Distrito Federal -->
+    </string-array>
+
+    <!-- Região Norte -->
+    <string-array name="Norte">
+        <item>AC</item> <!-- Acre -->
+        <item>AP</item> <!-- Amapá -->
+        <item>AM</item> <!-- Amazonas -->
+        <item>PA</item> <!-- Pará -->
+        <item>RO</item> <!-- Rondônia -->
+        <item>RR</item> <!-- Roraima -->
+        <item>TO</item> <!-- Tocantins -->
+    </string-array>
+
+    <!-- Região Nordeste -->
+    <string-array name="Nordeste">
+        <item>AL</item> <!-- Alagoas -->
+        <item>BA</item> <!-- Bahia -->
+        <item>CE</item> <!-- Ceará -->
+        <item>MA</item> <!-- Maranhão -->
+        <item>PB</item> <!-- Paraíba -->
+        <item>PE</item> <!-- Pernambuco -->
+        <item>PI</item> <!-- Piauí -->
+        <item>RN</item> <!-- Rio Grande do Norte -->
+        <item>SE</item> <!-- Sergipe -->
+    </string-array>
+
+    <!-- Região Sudeste -->
+    <string-array name="Sudeste">
+        <item>ES</item> <!-- Espírito Santo -->
+        <item>MG</item> <!-- Minas Gerais -->
+        <item>RJ</item> <!-- Rio de Janeiro -->
+        <item>SP</item> <!-- São Paulo -->
+    </string-array>
+
+    <!-- Região Sul -->
+    <string-array name="Sul">
+        <item>PR</item> <!-- Paraná -->
+        <item>RS</item> <!-- Rio Grande do Sul -->
+        <item>SC</item> <!-- Santa Catarina -->
+    </string-array>
+
 </resources>

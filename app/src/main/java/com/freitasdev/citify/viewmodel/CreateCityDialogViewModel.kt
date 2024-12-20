@@ -1,10 +1,13 @@
 package com.freitasdev.citify.viewmodel
 
+import android.content.res.Resources
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.freitasdev.citify.R
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
 import kotlinx.coroutines.launch
@@ -20,6 +23,7 @@ class CreateCityDialogViewModel(private val repository: CityRepository): ViewMod
     }
 
     private suspend fun _createCity(cityEntity: CityEntity) {
+
         if(_getCityByEntity(cityEntity)) {
             _createdStatus.value = false
             return

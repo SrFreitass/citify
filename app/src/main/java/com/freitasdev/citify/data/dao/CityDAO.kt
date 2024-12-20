@@ -30,9 +30,15 @@ interface CityDAO {
     @Query("SELECT * FROM cities WHERE LOWER(name) = LOWER(:name) AND uf = :uf AND region = :region")
     suspend fun getCityByInfo(name: String, uf: String, region: String): CityEntity
 
-    @Query("SELECT * FROM cities WHERE LOWER(name) LIKE LOWER(:name)")
+    @Query("SELECT * FROM cities WHERE LOWER(name) LIKE LOWER(:name) AND isDeleted = 0 ORDER BY id DESC")
     suspend fun getCityByName(name: String): List<CityEntity>
 
     @Update
     suspend fun updateCity(city: CityEntity)
+
+    @Query("SELECT * FROM cities WHERE region = :region AND isDeleted = 0 ORDER BY id DESC")
+    suspend fun getCityByRegion(region: String): List<CityEntity>
+
+    @Query("SELECT * FROM cities WHERE uf = :state AND isDeleted = 0 ORDER BY id DESC")
+    suspend fun getCityByState(state: String): List<CityEntity>
 }

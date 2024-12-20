@@ -1,6 +1,7 @@
 package com.freitasdev.citify.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,23 @@ class CreateCityDialogFragment(private val onCreateCity: () -> Unit) : DialogFra
                 Toast.makeText(requireContext(), "Cidade inválida", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+            val states = when (region.selectedItem.toString()) {
+                "Centro-Oeste" -> resources.getStringArray(R.array.Centro_oeste)
+                "Nordeste" -> resources.getStringArray(R.array.Nordeste)
+                "Norte" -> resources.getStringArray(R.array.Norte)
+                "Sudeste" -> resources.getStringArray(R.array.Sudeste)
+                "Sul" -> resources.getStringArray(R.array.Sul)
+                else -> resources.getStringArray(R.array.Centro_oeste)
+            }
+
+            if(states.indexOf(uf.selectedItem.toString()) == -1) {
+                Toast.makeText(requireContext(), "Estado inválido não corresponde a região", Toast.LENGTH_LONG).show()
+
+                return@setOnClickListener
+            }
+
+            Log.i("CreateCity", "$states")
 
             viewModel.createCity(
                 CityEntity(
