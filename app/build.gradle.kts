@@ -58,7 +58,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Conversor Gson
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1") // Dependências para corrotinas (verifique a versão mais recente)
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation(libs.androidx.junit.ktx)// interceptador de log para debugar
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.espresso.idling.resource)// interceptador de log para debugar
     ksp(libs.androidx.room.compiler)
     implementation(libs.room.ktx)
     testImplementation(libs.junit)

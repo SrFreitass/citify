@@ -40,81 +40,69 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:focusable="false"
-            android:focusableInTouchMode="true"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="true">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
             <com.google.android.material.textfield.TextInputEditText
-                android:inputType="textFilter"
                 android:id="@+id/search_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/search_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/search_cities"
-                />
+                android:inputType="textFilter" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <Spinner
+            android:id="@+id/state_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border"
+            android:entries="@array/uf_options_filter"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="18dp" />
 
-            <Spinner
-                android:layout_marginTop="10dp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="18dp"
-                android:background="@drawable/border"
-                android:id="@+id/state_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/uf_options_filter"
-                />
+        <RadioGroup
+            android:id="@+id/region_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
 
+            >
 
-            <RadioGroup
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/region_filter"
+                android:layout_marginEnd="5dp"
+                android:hint="Cent. O" />
 
-                >
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Cent. O"
-                    android:layout_marginEnd="5dp"
-                    />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Sul"
-                    android:layout_marginEnd="5dp"
-                    />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Nort."
-                    android:layout_marginEnd="5dp"
-                    />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Nord."
-                    android:layout_marginEnd="5dp"
-                    />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Sud."
-                    android:layout_marginEnd="5dp"
-                    />
-            </RadioGroup>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:hint="Sul" />
 
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:hint="Nort." />
 
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:hint="Nord." />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:hint="Sud." />
+        </RadioGroup>
 
 
         <androidx.recyclerview.widget.RecyclerView

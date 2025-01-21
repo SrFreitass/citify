@@ -4,6 +4,7 @@ import android.util.Log
 import com.freitasdev.citify.data.dao.CityDAO
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.remote.ApiClient
+import com.freitasdev.citify.utils.EspressoIdlingResource
 
 
 class CityRepository(private val cityDAO: CityDAO) {

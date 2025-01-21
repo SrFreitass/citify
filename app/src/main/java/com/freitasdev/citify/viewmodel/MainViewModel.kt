@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
+import com.freitasdev.citify.utils.EspressoIdlingResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -14,17 +15,22 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
     private val _syncStatus = MutableLiveData<String>()
     val syncStatus: LiveData<String> = _syncStatus
 
+    private val _syncStatusBool = MutableLiveData(false)
+    val syncStatusBool: LiveData<Boolean> = _syncStatusBool
+
     private val _cities = MutableLiveData<List<CityEntity>>()
     val cities: LiveData<List<CityEntity>> = _cities
 
 
     private suspend fun _syncData() {
+        EspressoIdlingResource.increment()
         _syncStatus.value = "Sincronizando dados..."
 
         val cities = repository.getCities()
 
         if(cities.isNotEmpty()) {
             _syncStatus.value = "Dados já sincronizados!"
+            _syncStatusBool.value = true
             delay(1000)
             _syncStatus.value = ""
             return
@@ -35,11 +41,14 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
         _syncStatus.value = "Dados sincronizados dados com sucesso!"
         delay(1000)
         _syncStatus.value = ""
+        EspressoIdlingResource.decrement()
     }
 
     private suspend fun _getCities() {
+        EspressoIdlingResource.increment()
         val citiesResponse = repository.getCities()
         _cities.value = citiesResponse.toMutableList()
+        EspressoIdlingResource.decrement()
     }
 
     private suspend fun _deleteCity(id: Int) {
@@ -51,7 +60,10 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
     }
 
     private suspend fun _getCityByName(name: String) {
-        _cities.value = repository.getCityByName("%$name%") ?: listOf()
+        EspressoIdlingResource.increment()
+        val cities = repository.getCityByName("%$name%") ?: listOf()
+        _cities.value = cities
+        EspressoIdlingResource.decrement()
     }
 
     private suspend fun _getCityByRegion(region: String) {
