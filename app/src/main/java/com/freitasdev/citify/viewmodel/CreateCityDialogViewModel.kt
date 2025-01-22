@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.freitasdev.citify.R
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
+import com.freitasdev.citify.utils.EspressoIdlingResource
 import kotlinx.coroutines.launch
 
 class CreateCityDialogViewModel(private val repository: CityRepository): ViewModel() {
@@ -23,7 +24,7 @@ class CreateCityDialogViewModel(private val repository: CityRepository): ViewMod
     }
 
     private suspend fun _createCity(cityEntity: CityEntity) {
-
+        EspressoIdlingResource.increment()
         if(_getCityByEntity(cityEntity)) {
             _createdStatus.value = false
             return
@@ -31,6 +32,7 @@ class CreateCityDialogViewModel(private val repository: CityRepository): ViewMod
 
         repository.createCity(cityEntity)
         _createdStatus.value = true
+        EspressoIdlingResource.decrement()
     }
 
     fun createCity(cityEntity: CityEntity) {

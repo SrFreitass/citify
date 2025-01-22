@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.freitasdev.citify.model.entities.CityEntity
 import com.freitasdev.citify.repository.CityRepository
+import com.freitasdev.citify.utils.EspressoIdlingResource
 import kotlinx.coroutines.launch
 
 class UpdateCityDialogViewModel(private val repository: CityRepository): ViewModel() {
@@ -19,7 +20,9 @@ class UpdateCityDialogViewModel(private val repository: CityRepository): ViewMod
     }
 
     private suspend fun _updateCity(cityEntity: CityEntity) {
+        EspressoIdlingResource.increment()
         repository.updateCity(cityEntity)
+        EspressoIdlingResource.decrement()
     }
 
     fun updateCity(cityEntity: CityEntity) {

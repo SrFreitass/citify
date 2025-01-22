@@ -52,11 +52,13 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
     }
 
     private suspend fun _deleteCity(id: Int) {
+        EspressoIdlingResource.increment()
         repository.deleteCity(id)
         val updatedList = _cities.value?.filter {
             it.id != id
         }
         _cities.value = updatedList ?: listOf()
+        EspressoIdlingResource.decrement()
     }
 
     private suspend fun _getCityByName(name: String) {
@@ -67,7 +69,9 @@ class MainViewModel(private val repository: CityRepository) : ViewModel() {
     }
 
     private suspend fun _getCityByRegion(region: String) {
+        EspressoIdlingResource.increment()
         _cities.value = repository.getCityByRegion(region) ?: listOf()
+        EspressoIdlingResource.decrement()
     }
 
     private suspend fun _getCityByState(state: String) {

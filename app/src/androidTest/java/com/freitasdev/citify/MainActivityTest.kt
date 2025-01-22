@@ -1,12 +1,16 @@
 package com.freitasdev.citify
 
 
+import android.provider.Settings
+import android.view.KeyEvent
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.pressImeActionButton
+import androidx.test.espresso.action.ViewActions.pressKey
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.platform.app.InstrumentationRegistry
@@ -14,15 +18,17 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.freitasdev.citify.utils.EspressoIdlingResource
 import org.junit.After
-
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.hamcrest.Matchers.hasToString
+import org.hamcrest.Matchers.not
 
 
 import org.junit.Assert.*
@@ -99,10 +105,22 @@ class MainActivityTest {
         onView(withId(R.id.state_filter))
             .perform(click())
 
-     /*   onData(withText("MS"))
-            .perform(click())*/
+        onData(hasToString("MS"))
+            .perform(click())
+
+        onView(withId(R.id.cities))
+            .check(matches(isDisplayed()))
     }
 
+    @Test
+    fun onFilterByRegion() {
+        onSyncCities()
+
+        onView(withId(R.id.radio_btn_1)).perform(click())
+
+        onView(withId(R.id.cities))
+            .check(matches(isDisplayed()))
+    }
 
     @Test
     fun titleOnView() {
@@ -112,6 +130,85 @@ class MainActivityTest {
 
     @Test
     fun createCity() {
+        onView(withId(R.id.create_button))
+            .perform(click())
 
+        onView(withId(R.id.city_input))
+            .perform(typeText("Brasilia"), closeSoftKeyboard(), pressImeActionButton())
+
+        onView(withId(R.id.state_input))
+            .perform(click())
+
+        onView(withText("DF"))
+            .inRoot(RootMatchers.isPlatformPopup())
+            .perform(click())
+
+        onView(withId(R.id.region_input))
+            .perform(click())
+
+        onView(withText("Centro-Oeste"))
+            .inRoot(RootMatchers.isPlatformPopup())
+            .perform(click())
+
+        onView(withId(R.id.create_city_btn))
+            .perform(click())
+
+        onView(withId(R.id.cities))
+            .check(matches(isDisplayed()))
+
+    }
+
+    @Test
+    fun updateCity() {
+        createCity()
+
+        onView(withId(R.id.update_btn))
+            .perform(click())
+
+        onView(withId(R.id.city_input))
+            .perform(replaceText("Solidao"), closeSoftKeyboard(), pressImeActionButton())
+
+        onView(withId(R.id.state_input))
+            .perform(click())
+
+        onView(withText("MT"))
+            .inRoot(RootMatchers.isPlatformPopup())
+            .perform(click())
+
+        onView(withId(R.id.region_input))
+            .perform(click())
+
+        onView(withText("Centro-Oeste"))
+            .inRoot(RootMatchers.isPlatformPopup())
+            .perform(click())
+
+        onView(withId(R.id.save_update))
+            .perform(click())
+
+        onView(withId(R.id.cities))
+            .check(matches(isDisplayed()))
+
+        onView(withText("Solidao"))
+            .check(matches(isDisplayed()))
+
+        onView(withText("MT"))
+            .check(matches(isDisplayed()))
+
+        onView(withText("Centro-Oeste"))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun deleteCity() {
+        createCity()
+
+        onView(withId(R.id.delete_btn))
+            .perform(click())
+
+        onView(withText("CONFIRMAR"))
+            .perform(click())
+
+        onView(withId(R.id.cities))
+            .check(matches(not(isDisplayed())))
     }
 }
