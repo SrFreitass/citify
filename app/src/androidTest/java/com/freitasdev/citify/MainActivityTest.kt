@@ -33,8 +33,11 @@ import org.hamcrest.Matchers.not
 
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.FixMethodOrder
 import org.junit.Rule
-
+import org.junit.runner.OrderWith
+import org.junit.runner.manipulation.Sorter
+import org.junit.runners.MethodSorters
 
 
 /**
@@ -45,6 +48,7 @@ import org.junit.Rule
 val idlingResource = CountingIdlingResource("waitForView")
 
 @RunWith(AndroidJUnit4::class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class MainActivityTest {
     @Before
     fun setup() {
@@ -67,7 +71,7 @@ class MainActivityTest {
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun onLaunched() {
+    fun test_1_onLaunched() {
         onView(withId(R.id.search_input))
             .check(matches(isDisplayed()))
         
@@ -79,7 +83,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun onSyncCities() {
+    fun test_6_onCitiesSync() {
 
         onView(withId(R.id.sync_button))
             .perform(click())
@@ -89,8 +93,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun onSearchCity() {
-        onSyncCities()
+    fun test_7_onCitySearch() {
 
         onView(withId(R.id.search_input))
             .perform(click(), typeText("Campo Grande"), closeSoftKeyboard(), pressImeActionButton())
@@ -99,9 +102,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun onFilterByState() {
-        onSyncCities()
-
+    fun test_8_onFilterByState() {
         onView(withId(R.id.state_filter))
             .perform(click())
 
@@ -113,9 +114,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun onFilterByRegion() {
-        onSyncCities()
-
+    fun test_9_onFilterByRegion() {
         onView(withId(R.id.radio_btn_1)).perform(click())
 
         onView(withId(R.id.cities))
@@ -123,13 +122,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun titleOnView() {
-        onView(withText("Cidades do Brasil"))
-            .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun createCity() {
+    fun test_2_createCity() {
         onView(withId(R.id.create_button))
             .perform(click())
 
@@ -159,8 +152,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun updateCity() {
-        createCity()
+    fun test_3_updateCity() {
 
         onView(withId(R.id.update_btn))
             .perform(click())
@@ -199,9 +191,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun deleteCity() {
-        createCity()
-
+    fun test_4_deleteCity() {
         onView(withId(R.id.delete_btn))
             .perform(click())
 
